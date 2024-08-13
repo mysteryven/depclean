@@ -1,0 +1,29 @@
+{
+    "name": "depclean",
+    "version": "0.7.1",
+    "description": "A rust version depcheck to help you find and remove unused dependencies in your package.json",
+    "keywords": [
+        "depclean",
+        "depcheck",
+        "npm",
+        "node",
+        "rust"
+    ],
+    "author": "mysteryven",
+    "license": "MIT",
+    "homepage": "https://github.com/mysteryven/depclean",
+    "bugs": "https://github.com/mysteryven/depclean/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mysteryven/depclean",
+        "directory": "npm"
+    },
+    "bin": "bin/depclean",
+    "engines": {
+        "node": ">=14.*"
+    },
+    "files": [
+        "bin/depclean",
+        "README.md"
+    ]
+}
