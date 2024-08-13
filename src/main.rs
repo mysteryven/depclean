@@ -1,3 +1,6 @@
+use depclean::DepChecker;
+
 fn main() {
-    println!("Hello, world!");
+    let mut checker = DepChecker::new();
+    checker.run();
 }

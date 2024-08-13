@@ -1,8 +1,4 @@
-use std::{
-    env::current_dir,
-    path::Path,
-    sync::Arc,
-};
+use std::{env::current_dir, path::Path, sync::Arc};
 
 use colorful::Colorful;
 use dependencies::DependenceBuilder;
@@ -38,9 +34,6 @@ impl DepChecker {
     /// # Panics
     /// if package.json not found in the root directory
     pub fn check(&mut self, root_path: &Path) -> Vec<CompactStr> {
-        if !root_path.join("package.json").exists() {
-            eprintln!("package.json not found in the root directory");
-        }
         let paths: FxHashSet<Box<Path>> = Walk::new(root_path.to_path_buf())
             .paths()
             .into_iter()
@@ -79,7 +72,15 @@ impl DepChecker {
     }
 
     pub fn run_with_path(&mut self, path: &Path) {
+        if !path.join("package.json").exists() {
+            eprintln!("Didn't find package.json in current directory, did you run this command in the right place?");
+            return;
+        }
         let unused_deps = self.check(path);
+        if unused_deps.is_empty() {
+            println!("No unused dependencies found, good!");
+            return;
+        }
         let dep_text = if unused_deps.len() > 1 {
             "dependencies"
         } else {

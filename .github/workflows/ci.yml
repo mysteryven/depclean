@@ -69,7 +69,7 @@ jobs:
           restore-cache: false
           tools: cargo-deny
 
-      - if: steps.filter.outputs.src == 'true'
+      - if: steps.filter.outpts.src == 'true'
         run: cargo deny check
 
   unused-deps:

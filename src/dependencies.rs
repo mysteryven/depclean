@@ -11,10 +11,11 @@ pub struct PackageJSON {
     dependencies: FxHashMap<Atom, Atom>,
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Deserialize)]
 pub struct DependenceContainer {
     /// dependencies collect from package.json
-    dependencies: FxHashSet<Atom>,
+    #[serde(default)]
+    dependencies: FxHashSet<CompactStr>,
 }
 
 impl DependenceContainer {

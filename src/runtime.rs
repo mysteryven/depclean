@@ -11,7 +11,7 @@ use crate::{
     Atom,
 };
 
-const EXTENSIONS: [&str; 4] = ["js", "jsx", "mjs", "cjs", "ts", "tsx"];
+const EXTENSIONS: &[&str] = &["js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx"];
 
 pub struct DepCheckerContext<'a> {
     semantic: Rc<Semantic<'a>>,
@@ -64,15 +64,26 @@ impl Runtime {
     /// # Panics
     /// if the file extension is not one of "js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx"
     ///
-    /// check js kind files, includes .js, .jsx, .ts, .tsx
-    /// analyze their esm and cjs dependencies
+    /// Analyze their esm and cjs dependencies, return the used dependencies
+    /// for file: 
+    /// 
+    /// ```js
+    /// import A from './a.js';
+    /// import B from 'b/foo.mjs';
+    /// const C = require('c')
+    /// ```
+    /// 
+    /// We will get `["b/foo.mjs", "c"]`
     pub fn check_js_files(&self, path: &Path) -> Vec<CompactStr> {
         let Ok(source_type) = SourceType::from_path(path) else {
             eprintln!("Unsupported file type: {:?}", path);
             return vec![];
         };
 
-        let source_text = fs::read_to_string(path).unwrap();
+        let Ok(source_text) = fs::read_to_string(path) else {
+            eprintln!("Failed to read file: {:?}", path);
+            return vec![];
+        };
         let allocator = Allocator::default();
         let ret = Parser::new(&allocator, &source_text, source_type)
             .allow_return_outside_function(true)
