@@ -1,24 +1,32 @@
-# DepClean
+<h1 align="center">🧼 DepClean</h1>
 
-A Rust port of [depcheck](https://github.com/depcheck/depcheck). Currently, it only supports analyze ESM and require statement in your JS family files(js, jsx, mjs, cjs, ts, tsx), my goal is to port the original depcheck.
+A Rust port version of [Depcheck](https://github.com/depcheck/depcheck). It supports analyze ESM and require statement in your JS family files currently.
 
-[depCheck](https://github.com/depcheck/depcheck) is a really awesome tool, you definitely should check it out first!
+```js
+["js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx"]
+```
+
+My goal is to port the original Depcheck.
+
+[DepCheck](https://github.com/depcheck/depcheck) is a really awesome tool, you definitely should check it out first!
 
 ## Installation
 
 ```sh
+npm install depclean  
+pnpm install depclean
 ```
 
 ## Usage
 
 ```sh
-depclean
+npx depclean
 ```
 
 ## Add this to your CI
 
 ```sh
-depclean
+depcheck
 ```
 
 ## Credits

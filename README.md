@@ -1,4 +1,5 @@
-# DepClean
+<h1 align="center">🧼 DepClean</h1>
+
 
 A Rust port version of [Depcheck](https://github.com/depcheck/depcheck). It supports analyze ESM and require statement in your JS family files currently.
 
