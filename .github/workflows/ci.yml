@@ -36,7 +36,6 @@ jobs:
           # cache `target` directory to avoid download crates
           save-cache: ${{ github.ref_name == 'main' }}
           cache-key: warm
-      - run: cargo ck
       - run: cargo test --no-run
       - run: cargo test
       - run: git diff --exit-code # Must commit everything
@@ -116,7 +115,7 @@ jobs:
         with:
           cache-key: warm
           components: clippy
-      - run: cargo lint -- -D warnings
+      - run: cargo clippy -- -D warnings
 
   doc:
     name: Doc

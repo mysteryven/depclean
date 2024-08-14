@@ -40,14 +40,14 @@ impl<'a> DepCheckerContext<'a> {
     }
 
     /// Add a dependency to the used dependencies set if it was used in current file.
-    /// 
+    ///
     /// In the below example, `A` and `c` is used, `B` is unused.
     /// ```js
     /// import A from 'a';
     /// import B from 'b';
-    /// 
+    ///
     /// console.log(A)
-    /// 
+    ///
     /// export * as C from 'c';
     /// ```
     pub fn add_use(&self, name: CompactStr) {
@@ -74,18 +74,18 @@ impl Runtime {
     }
 
     /// # Panics
-    /// 
+    ///
     /// If the file extension is not one of "js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx"
     ///
     /// Analyze their esm and cjs dependencies, return the used dependencies
-    /// for file: 
-    /// 
+    /// for file:
+    ///
     /// ```js
     /// import A from './a.js';
     /// import B from 'b/foo.mjs';
     /// const C = require('c')
     /// ```
-    /// 
+    ///
     /// We will get `["b/foo.mjs", "c"]`
     pub fn check_js_files(&self, path: &Path) -> Vec<CompactStr> {
         let Ok(source_type) = SourceType::from_path(path) else {

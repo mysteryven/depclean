@@ -88,10 +88,7 @@ impl DepClean {
         }
 
         let dep_text = if unused_deps.len() > 1 {
-            let title = format!(
-                "Found {} unused dependencies:\n",
-                unused_deps.len(),
-            );
+            let title = format!("Found {} unused dependencies:\n", unused_deps.len(),);
             let body = unused_deps
                 .iter()
                 .map(|dep| format!("  - {}", dep))

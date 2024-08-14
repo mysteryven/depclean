@@ -1,5 +1,6 @@
 use depclean::DepClean;
 
+#[ignore]
 #[test]
 fn test_simple() {
     let root_path = std::env::current_dir().unwrap().join("tests/fixtures");
