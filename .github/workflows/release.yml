@@ -154,7 +154,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version: 20.16.0
           registry-url: 'https://registry.npmjs.org'
 
       - name: Generate npm packages

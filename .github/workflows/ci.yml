@@ -12,6 +12,7 @@ on:
     paths-ignore:
       - '**/*.md'
       - '**/*.yml'
+      - '**/package.json'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
