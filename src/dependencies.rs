@@ -8,6 +8,7 @@ use crate::Atom;
 
 #[derive(Debug, Deserialize)]
 pub struct PackageJSON {
+    #[serde(default)]
     dependencies: FxHashMap<Atom, Atom>,
 }
 

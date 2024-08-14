@@ -81,9 +81,11 @@ impl DepClean {
         package_json_container.compute_unused_deps(&used_deps);
         let unused_deps = package_json_container.unused_dependencies();
         let elapsed = start.elapsed().as_millis();
+        let time_text = format!("Checked {} file(s) in {}ms.", paths.len(), elapsed).dark_gray();
 
         if unused_deps.is_empty() {
-            println!("{:?}", "No unused dependency, Good!".rainbow());
+            println!("No unused dependency.");
+            println!("\n{time_text}");
             std::process::exit(0);
         }
 
@@ -112,8 +114,6 @@ impl DepClean {
                 .join(" ")
         )
         .green();
-
-        let time_text = format!("Checked {} file(s) in {}ms.", paths.len(), elapsed).dark_gray();
 
         println!("{dep_text}\n\n{}\n{}", time_text, footer);
         std::process::exit(1);
