@@ -1,1 +1,0 @@
-{"name":"@depclean/darwin-arm64","version":"0.0.2","author":"mysteryven","license":"MIT","homepage":"https://github.com/mysteryven/depclean","bugs":"https://github.com/mysteryven/depclean/issues","repository":{"type":"git","url":"git+https://github.com/mysteryven/depclean.git","directory":"npm"},"os":["darwin"],"cpu":["arm64"]}

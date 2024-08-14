@@ -1,1 +1,34 @@
-{"name":"depclean","version":"0.0.2","description":"A rust version depcheck to help you find and remove unused dependencies in your package.json","keywords":["depclean","depcheck","npm","node","rust"],"author":"mysteryven","license":"MIT","homepage":"https://github.com/mysteryven/depclean","bugs":"https://github.com/mysteryven/depclean/issues","repository":{"type":"git","url":"git+https://github.com/mysteryven/depclean.git","directory":"npm"},"bin":{"depclean":"bin/depclean"},"engines":{"node":">=14.*"},"files":["bin/depclean","README.md"],"optionalDependencies":{"@depclean/darwin-arm64":"0.0.2"}}
+{
+    "name": "depclean",
+    "version": "0.0.3",
+    "description": "A rust version depcheck to help you find and remove unused dependencies in your package.json",
+    "keywords": [
+        "depclean",
+        "depcheck",
+        "npm",
+        "node",
+        "rust"
+    ],
+    "author": "mysteryven",
+    "license": "MIT",
+    "homepage": "https://github.com/mysteryven/depclean",
+    "bugs": "https://github.com/mysteryven/depclean/issues",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mysteryven/depclean.git",
+        "directory": "npm"
+    },
+    "bin": {
+        "depclean": "bin/depclean"
+    },
+    "engines": {
+        "node": ">=14.*"
+    },
+    "files": [
+        "bin/depclean",
+        "README.md"
+    ],
+    "optionalDependencies": {
+        "@depclean/darwin-arm64": "0.0.2"
+    }
+}
