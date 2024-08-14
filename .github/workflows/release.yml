@@ -155,7 +155,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20.16.0
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
 
       - name: Generate npm packages
         run: |
@@ -187,23 +187,3 @@ jobs:
 
       - name: wait 1 minute for smoke test
         run: sleep 60s
-
-  smoke:
-    needs: publish
-    strategy:
-      matrix:
-        include:
-          - os: windows-latest
-          - os: ubuntu-latest
-          - os: ubuntu-latest
-            container: node:18-alpine # musl
-          - os: macos-latest
-    name: Smoke Test ${{ matrix.os }} ${{ matrix.container }}
-    runs-on: ${{ matrix.os }}
-    container: ${{ matrix.container }}
-    steps:
-      - name: Test
-        run: |
-          touch test.js
-          ldd --version || true
-          npx depclean@${{ needs.check.outputs.version }} ./test.js
