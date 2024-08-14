@@ -1,5 +1,6 @@
 /target
 **/node_modules
 /tests/**/*.yaml
-/npm/!depclean/**/*
+/npm/*
+!/npm/depclean
 /depclean-*

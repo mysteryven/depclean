@@ -11,7 +11,6 @@ const DEPCLEAN_ROOT = resolve(fileURLToPath(import.meta.url), "../..");
 const PACKAGES_ROOT = resolve(DEPCLEAN_ROOT, "..");
 const REPO_ROOT = resolve(PACKAGES_ROOT, "..");
 const MANIFEST_PATH = resolve(DEPCLEAN_ROOT, "package.json");
-console.log(PACKAGES_ROOT);
 
 const rootManifest = JSON.parse(
   fs.readFileSync(MANIFEST_PATH).toString("utf-8")
@@ -91,13 +90,13 @@ function writeManifest() {
 
 // NOTE: Must update npm/depclean/bin/depclean
 const TARGETS = [
-  // "win32-x64",
-  // "win32-arm64",
-  // "linux-x64-gnu",
-  // "linux-arm64-gnu",
-  // "linux-x64-musl",
-  // "linux-arm64-musl",
-  // "darwin-x64",
+  "win32-x64",
+  "win32-arm64",
+  "linux-x64-gnu",
+  "linux-arm64-gnu",
+  "linux-x64-musl",
+  "linux-arm64-musl",
+  "darwin-x64",
   "darwin-arm64",
 ]
 
