@@ -31,7 +31,7 @@ impl Checker for JSFamily {
                         continue;
                     }
                     if let Some(str) =
-                        get_string_value(&call_expr.arguments[0].as_expression().unwrap())
+                        get_string_value(call_expr.arguments[0].as_expression().unwrap())
                     {
                         if !is_bare_import(&str) {
                             continue;
@@ -62,7 +62,7 @@ fn is_global_require_call(call_expr: &CallExpression, ctx: &DepCheckerContext) -
         return ctx.semantic().is_reference_to_global_variable(ident);
     }
 
-    return false;
+    false
 }
 
 fn is_bare_import(s: &str) -> bool {

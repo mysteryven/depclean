@@ -33,12 +33,7 @@ impl DepClean {
     ///
     /// # Panics
     /// if package.json not found in the root directory
-    pub fn check(&mut self, root_path: &Path) -> FxHashSet<CompactStr> {
-        let paths: FxHashSet<Box<Path>> = Walk::new(root_path.to_path_buf())
-            .paths()
-            .into_iter()
-            .collect();
-
+    pub fn check(&mut self, paths: &FxHashSet<Box<Path>>) -> FxHashSet<CompactStr> {
         let (sender, receiver) = std::sync::mpsc::channel::<Vec<CompactStr>>();
 
         paths
@@ -73,21 +68,30 @@ impl DepClean {
             std::process::exit(1);
         }
 
+        let text = "Start checking...\n".dark_gray();
+        println!("{text}");
+
         let mut builder = PackageJSONBuilder::new();
         builder.with_package_json(&package_json_path);
         let mut package_json_container = builder.build();
-        let used_deps = self.check(path);
+        let start = std::time::Instant::now();
+        let paths: FxHashSet<Box<Path>> = Walk::new(path).paths().into_iter().collect();
+
+        let used_deps = self.check(&paths);
         package_json_container.compute_unused_deps(&used_deps);
         let unused_deps = package_json_container.unused_dependencies();
+        let elapsed = start.elapsed().as_millis();
 
         if unused_deps.is_empty() {
-            let text = "No unused dependencies found, Good!".rainbow();
-            println!("{:?}", text);
+            println!("{:?}", "No unused dependency, Good!".rainbow());
             std::process::exit(0);
         }
 
         let dep_text = if unused_deps.len() > 1 {
-            let title = format!("{} dependencies unused in your project:", unused_deps.len(),);
+            let title = format!(
+                "Found {} unused dependencies:\n",
+                unused_deps.len(),
+            );
             let body = unused_deps
                 .iter()
                 .map(|dep| format!("  - {}", dep))
@@ -102,7 +106,7 @@ impl DepClean {
         };
 
         let footer = format!(
-            "\nRun `{} {}` to clean your codebase.",
+            "\nTo clean your codebase, run `{} {}` ",
             PkgManager::new_from_path(path).get_uninstall_cmd(),
             unused_deps
                 .iter()
@@ -112,6 +116,9 @@ impl DepClean {
         )
         .green();
 
-        println!("{dep_text}\n{}", footer);
+        let time_text = format!("Checked {} file(s) in {}ms.", paths.len(), elapsed).dark_gray();
+
+        println!("{dep_text}\n\n{}\n{}", time_text, footer);
+        std::process::exit(1);
     }
 }

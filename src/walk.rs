@@ -1,4 +1,4 @@
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use ignore::{ParallelVisitorBuilder, WalkBuilder, WalkParallel};
 
@@ -7,7 +7,7 @@ pub(crate) struct Walk {
 }
 
 impl Walk {
-    pub fn new(path: PathBuf) -> Self {
+    pub fn new(path: &Path) -> Self {
         let walker = WalkBuilder::new(path);
         let walk = walker.build_parallel();
         Self { inner: walk }

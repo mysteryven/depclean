@@ -89,11 +89,13 @@ impl Runtime {
     /// We will get `["b/foo.mjs", "c"]`
     pub fn check_js_files(&self, path: &Path) -> Vec<CompactStr> {
         let Ok(source_type) = SourceType::from_path(path) else {
+            #[cfg(debug_assertions)]
             eprintln!("Unsupported file type: {:?}", path);
             return vec![];
         };
 
         let Ok(source_text) = fs::read_to_string(path) else {
+            #[cfg(debug_assertions)]
             eprintln!("Failed to read file: {:?}", path);
             return vec![];
         };

@@ -6,7 +6,7 @@ use depclean::DepClean;
 #[derive(Clone, Debug, Bpaf)]
 #[bpaf(options, version)]
 struct DepCleanOptions {
-    /// The path to run this command. If absent, it will run in the current directory.
+    /// The path to run this command, will use the current directory if absent.
     path: Option<PathBuf>,
 }
 
