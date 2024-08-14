@@ -173,17 +173,3 @@ jobs:
             npm publish $package/ --tag latest --provenance --access public
             echo '----'
           done
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          body: ${{ steps.run.outputs.CHANGELOG }}
-          draft: true
-          files: depclean-*
-          name: depclean v${{ steps.run.outputs.VERSION }}
-          tag_name: depclean_v${{ steps.run.outputs.VERSION }}
-          fail_on_unmatched_files: true
-          target_commitish: ${{ github.sha }}
-
-      - name: wait 1 minute for smoke test
-        run: sleep 60s
