@@ -11,7 +11,8 @@ use crate::{
     Atom,
 };
 
-const EXTENSIONS: &[&str] = &["js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx"];
+/// Supported file extensions, we only analyze these js family files.
+const JS_EXTENSIONS: &[&str] = &["js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx"];
 
 pub struct DepCheckerContext<'a> {
     semantic: Rc<Semantic<'a>>,
@@ -38,6 +39,17 @@ impl<'a> DepCheckerContext<'a> {
         self.semantic().module_record()
     }
 
+    /// Add a dependency to the used dependencies set if it was used in current file.
+    /// 
+    /// In the below example, `A` and `c` is used, `B` is unused.
+    /// ```js
+    /// import A from 'a';
+    /// import B from 'b';
+    /// 
+    /// console.log(A)
+    /// 
+    /// export * as C from 'c';
+    /// ```
     pub fn add_use(&self, name: CompactStr) {
         self.used_deps.borrow_mut().insert(name);
     }
@@ -54,7 +66,7 @@ impl Runtime {
     pub fn process_path(&self, path: &Path, sender: &Sender<Vec<CompactStr>>) {
         if path
             .extension()
-            .map_or(false, |ext| EXTENSIONS.contains(&ext.to_str().unwrap()))
+            .map_or(false, |ext| JS_EXTENSIONS.contains(&ext.to_str().unwrap()))
         {
             let used_deps = self.check_js_files(path);
             sender.send(used_deps).unwrap();
@@ -62,7 +74,8 @@ impl Runtime {
     }
 
     /// # Panics
-    /// if the file extension is not one of "js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx"
+    /// 
+    /// If the file extension is not one of "js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx"
     ///
     /// Analyze their esm and cjs dependencies, return the used dependencies
     /// for file: 

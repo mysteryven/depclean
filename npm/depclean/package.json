@@ -19,7 +19,8 @@
         "directory": "npm"
     },
     "bin": {
-        "depclean": "bin/depclean"
+        "depclean": "bin/depclean",
+        "abc": "123"
     },
     "engines": {
         "node": ">=14.*"

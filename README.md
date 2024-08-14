@@ -27,10 +27,14 @@ npx depclean
 ## Add this to your CI
 
 ```sh
-depcheck
+depclean
 ```
 
 ## Credits
 
 - [depcheck](https://github.com/depcheck/depcheck)
 - [oxc](https://github.com/oxc-project/oxc)
+
+## LICENSE
+
+[MIT](./LICENSE)
