@@ -1,6 +1,6 @@
 {
     "name": "depclean",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "A rust version depcheck to help you find and remove unused dependencies in your package.json",
     "keywords": [
         "depclean",
