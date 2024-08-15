@@ -16,8 +16,11 @@ I want to
 ## Quick Start
 
 ```sh
-npx depclean
+npx depclean@latest
 ```
+
+![CleanShot 2024-08-15 at 09 12 14@2x](https://github.com/user-attachments/assets/cbc59b9c-c247-4cb7-98d3-88e49a572c14)
+
 
 ## Installation
 
