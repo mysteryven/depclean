@@ -104,6 +104,7 @@ impl DepClean {
             )
         };
 
+        // decide which package manager to use
         let footer = format!(
             "\nTo clean your codebase, run `{} {}` ",
             PkgManager::new_from_path(path).get_uninstall_cmd(),
